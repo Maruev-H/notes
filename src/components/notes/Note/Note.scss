@@ -29,8 +29,14 @@
   }
 
   &:hover {
+    background: gray;
+
     .Note__delete {
       display: block;
     }
   }
+}
+
+.selectedEntry {
+  background: gray;
 }
