@@ -7,40 +7,56 @@ import AddEntryPopup from "../../popups/add-entry-popup/AddEntryPopup";
 
 const Notes = () => {
 
-  const [sort, setSort] = useState("убыванию даты");
+  const [reverse, setReverse] = useState(false);
   const [search, setSearch] = useState("");
 
-  const [addEntryOpen, setAddEntryOpen] = useState(false)
+  const [addEntryOpen, setAddEntryOpen] = useState(false);
 
-  const {entryes} = useAppSelector(state => state.entryesSlice)  
+  const { entryes } = useAppSelector((state) => state.entryesSlice);
 
   const clickHandler = () => {
-    setAddEntryOpen(prev => !prev)
-  }
+    setAddEntryOpen((prev) => !prev);
+  };
 
-  const handleChange = (event: any) => {
-    setSearch(event.target.value)
-  }
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
 
-  const searchEntryes = entryes.filter(item => item.head.includes(search))
+  let searchEntryes = entryes.filter((item) => item.head.includes(search));
+
+  searchEntryes = reverse ? searchEntryes.slice().reverse() : searchEntryes 
+
+  const sortClickHandler = () => {
+    setReverse(prev => !prev)
+    
+  }
 
   return (
     <div className="Notes">
       <div className="Notes__options">
-        <Button value='+ Заметка' onClick={clickHandler}/>
+        <Button value="+ Заметка" onClick={clickHandler} />
         <input
-        value={search}
-        onChange={handleChange}
+          value={search}
+          onChange={handleChange}
           className="Notes__search large-text"
           type="text"
           placeholder="Поиск..."
         />
         <p className="large-text">
-          сортировать по <span>{sort}</span>
+          сортировать по{" "}
+          <span className="Notes__sort">
+            {reverse ? 'возрастанию даты' : 'убыванию даты'}
+            <div className="Notes__sort__points">
+              <span onClick={sortClickHandler} className="Notes__sort">{reverse ? 'возрастанию даты' : 'убыванию даты'}</span>
+              <span onClick={sortClickHandler} className="Notes__sort">{reverse ? 'убыванию даты' : 'возрастанию даты'}</span>
+            </div>
+          </span>
         </p>
       </div>
       <div className="Notes__entries">
-        {searchEntryes.length ? searchEntryes.map(entry => <Note key={entry.id} {...entry} />) : 'ничего не найдено'}    
+        {searchEntryes.length
+          ? searchEntryes.map((entry) => <Note key={entry.id} {...entry} />)
+          : "ничего не найдено"}
       </div>
       {addEntryOpen && <AddEntryPopup clickHandler={clickHandler} />}
     </div>

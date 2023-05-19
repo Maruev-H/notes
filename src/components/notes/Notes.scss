@@ -1,9 +1,9 @@
 .Notes {
-  flex: 3;
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 30%;
 
   &__options {
     display: flex;
@@ -26,5 +26,28 @@
     flex-direction: column;
     gap: 10px;
     flex-grow: 1;
+  }
+
+  &__sort {
+    background: darkgray;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+      background: gray;
+
+      .Notes__sort__points {
+        display: flex;
+      }
+    }
+
+    &__points {
+      display: none;
+      position: absolute;
+      flex-direction: column;
+      width: 176px;
+      left: 0;
+      top: 0;
+    }
   }
 }
