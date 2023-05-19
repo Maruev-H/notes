@@ -1,0 +1,36 @@
+.Note {
+  height: 50px;
+  border: 1px solid black;
+  padding: 5px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+
+  &__head {
+    margin: 0;
+  }
+
+  &__content {
+    margin: 0;
+  }
+
+  &__delete {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 2rem;
+    display: none;
+
+    &:hover {
+        color: red;
+    }
+  }
+
+  &:hover {
+    .Note__delete {
+      display: block;
+    }
+  }
+}
