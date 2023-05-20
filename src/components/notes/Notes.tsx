@@ -26,9 +26,12 @@ const Notes = () => {
 
   searchEntryes = reverse ? searchEntryes.slice().reverse() : searchEntryes 
 
-  const sortClickHandler = () => {
-    setReverse(prev => !prev)
-    
+  const sortReverseClickHandler = () => {
+    setReverse(true)
+  }
+
+  const sortNotReverseClickHandler = () => {
+    setReverse(false)
   }
 
   return (
@@ -47,8 +50,8 @@ const Notes = () => {
           <span className="Notes__sort">
             {reverse ? 'возрастанию даты' : 'убыванию даты'}
             <div className="Notes__sort__points">
-              <span onClick={sortClickHandler} className="Notes__sort">{reverse ? 'возрастанию даты' : 'убыванию даты'}</span>
-              <span onClick={sortClickHandler} className="Notes__sort">{reverse ? 'убыванию даты' : 'возрастанию даты'}</span>
+              <span onClick={sortNotReverseClickHandler} className="Notes__sort">убыванию даты</span>
+              <span onClick={sortReverseClickHandler} className="Notes__sort">возрастанию даты</span>
             </div>
           </span>
         </p>
